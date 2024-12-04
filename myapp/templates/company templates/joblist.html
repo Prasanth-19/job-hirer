@@ -1,0 +1,64 @@
+{% extends 'company templates/base.html' %}
+{% block content %}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Job Lists</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'compage' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Lists</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                These are the jobs you had posted in this page 
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Jobs List
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Job Name</th>
+                            <th>Company Name</th>
+                            <th>Location</th>
+                            <th>Company Website</th>
+                            <th>Experience</th>
+                            <th>Salary Package </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Job Name</th>
+                            <th>Company Name</th>
+                            <th>Location</th>
+                            <th>Company Website</th>
+                            <th>Experience</th>
+                            <th>Salary Package </th>
+                        </tr>
+
+                    </tfoot>
+                    {% if jobs %}
+                    <tbody>
+                        
+                        {% for i in jobs %}
+                        <tr>
+                            <td>{{ i.job_name }}</td>
+                            <td>{{ i.company_name }}</td>
+                            <td>{{ i.location }}</td>
+                            <td>{{ i.company_website }}</td>
+                            <td>{{ i.experience }}</td>
+                            <td>{{ i.salary }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

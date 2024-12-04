@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if user %}
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Apply Jobs</h1>
+        
+    </div>
+</div>
+<div class="container-fluid px-4">
+    <h1 class="mt-4"> Applied Job Lists</h1>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            These are the jobs you had applied in this page 
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Jobs List
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple" style="border-collapse: collapse; width: 100%;">
+                <thead>
+                    <tr style="border: 1px solid #dee2e6;">
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Job Title</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Candidate Name</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Education</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Gender</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Email</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Contact</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Experience</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Website</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Resume</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Cover Letter</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr style="border: 1px solid #dee2e6;">
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Job Title</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Candidate Name</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Education</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Gender</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Email</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Contact</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Experience</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Website</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Resume</th>
+                        <th style="border: 1px solid #dee2e6; padding: 8px;">Cover Letter</th>
+                    </tr>
+                </tfoot>
+                {% if a_job %}
+                <tbody>
+                    {% for i in a_job %}
+                    <tr style="border: 1px solid #dee2e6;">
+                        <td style="border: 1px solid #dee2e6; padding: 8px;">{{ i.job.job_name }}</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px;">{{ i.candidate.firstname }} {{ i.candidate.lastname }}</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px;">{{ i.education }}</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px;">{{ i.gender }}</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px;">{{ i.email }}</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px;">{{ i.contact }}</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px;">{{ i.experience }}</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px;">{{ i.website }}</td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px;"><a href="{{ i.resume.url }}">Download</a></td>
+                        <td style="border: 1px solid #dee2e6; padding: 8px;">{{ i.coverletter }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+

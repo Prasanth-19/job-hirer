@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if user %}
+{% if cand %}
+{% if job %}
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row gy-5 gx-4">
+            <div class="">
+                <h4 class="mb-4">Apply For The Job</h4>
+                {% if msg %}
+                <h3>{{ msg }}</h3>
+                {% endif %}
+                <form method="POST" action="{% url 'j_apply' pk=job.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-12 col-sm-6">
+                            <label for="j_name">JOB NAME</label>
+                            <input type="text" class="form-control" name="j_name" value="{{ job.job_name }}" readonly>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="fname">CANDIDATE FIRST NAME</label>
+                            <input type="text" class="form-control" name="fname" value="{{ cand.firstname }}" readonly>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="lname">CANDIDATE LAST NAME</label>
+                            <input type="text" class="form-control" name="lname" value="{{ cand.lastname }}" readonly>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="gender">GENDER</label>
+                            <input type="text" class="form-control" name="gender" value="" >
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="email">EMAIL</label>
+                            <input type="email" class="form-control" name="email" value="" >
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="contact">CONTACT</label>
+                            <input type="text" class="form-control" name="contact" value="">
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="education">EDUCATION</label>
+                            <input type="text" class="form-control" name="education" value="">
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="experience">EXPERIENCE</label>
+                            <input type="text" class="form-control" name="experience" value="">
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="website">PORTFOLIO WEBSITE</label>
+                            <input type="text" class="form-control" name="website">
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="resume">RESUME</label>
+                            <input type="file" class="form-control bg-white" name="resume">
+                        </div>
+                        <div class="col-12">
+                            <label for="cover_letter">COVER LETTER</label>
+                            <textarea class="form-control" rows="5" name="cover_letter"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+{% endif %}
+{% endblock %}
+

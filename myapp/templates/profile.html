@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Profile Page</h1>
+        
+    </div>
+</div>
+
+<div class="container brochure-bg mt-5 mb-5">
+    <div class="row">
+        <!-- Profile Picture Section -->
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img id="preview" class="profile-img mt-5" src="{% if can.profile_pic %}{{ can.profile_pic.url }}{% else %}https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg{% endif %}">
+                <span class="font-weight-bold"><h5>{{ can.firstname }}</h5></span>
+                <span class="text-black-50"><h6>{{ request.session.email }}</h6></span>
+                <form action="{% url 'uprofile' pk=request.session.user_id %}" method="POST" enctype="multipart/form-data" class="mt-3">
+                    {% csrf_token %}
+                    <label for="file" class="custom-file-upload">Upload Image</label>
+                    <input type="file" id="file" name="profile_pic" accept="image/*" onchange="previewImage(event)">
+                    <br><br>
+                    <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Personal Information Section -->
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <h4 class="text-right">Profile Update</h4>
+                <form action="{% url 'uprofile' pk=request.session.user_id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels">First Name</label>
+                            <input type="text" class="form-control" placeholder="First name" name="firstname" value="{{ can.firstname }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Last Name</label>
+                            <input type="text" class="form-control" placeholder="Last name" name="lastname" value="{{ can.lastname }}">
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label class="labels">Date of Birth</label>
+                            <input type="text" class="form-control" placeholder="DD-MM-YYYY" name="d_o_b" value="{{ can.dob }}">
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label class="labels">Gender</label>
+                            <input type="text" class="form-control" placeholder="Gender" name="gender" value="{{ can.gender }}">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Mobile Number</label>
+                            <input type="text" class="form-control" placeholder="Phone number" name="con" value="{{ can.contact }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">City</label>
+                            <input type="text" class="form-control" placeholder="City" name="_city" value="{{ can.city }}">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Postcode</label>
+                            <input type="text" class="form-control" placeholder="Postcode" name="postal" value="{{ can.pincode }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">State</label>
+                            <input type="text" class="form-control" placeholder="State" name="stat_e" value="{{ can.state }}">
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <label class="labels">Address</label>
+                            <input type="text" class="form-control" placeholder="Address" name="_address" value="{{ can.address }}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Job Preferences Section -->
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <h4 class="text-right">Job Preferences</h4>
+                <form action="{% url 'uprofile' pk=request.session.user_id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">Minimum Salary</label>
+                            <input type="text" class="form-control" placeholder="Minimum Salary" name="min_s" value="{{ can.min_salary }}">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Maximum Salary</label>
+                            <input type="text" class="form-control" placeholder="Maximum Salary" name="max_s" value="{{ can.max_salary }}">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Job Type</label>
+                            <input type="text" class="form-control" placeholder="Job Type" name="j_type" value="{{ can.job_type }}">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Job Category</label>
+                            <input type="text" class="form-control" placeholder="Job Category" name="j_cat" value="{{ can.job_category }}">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Description</label>
+                            <input type="text" class="form-control" placeholder="Description" name="desc" value="{{ can.description }}">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Website</label>
+                            <input type="text" class="form-control" placeholder="Website" name="web" value="{{ can.website }}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewImage(event) {
+        const preview = document.getElementById('preview');
+        const file = event.target.files[0];
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+        } else {
+            preview.src = "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg";
+        }
+    }
+    document.getElementById('file').addEventListener('change', previewImage);
+</script>
+<style>
+    .profile-img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+</style>
+{% endblock %}

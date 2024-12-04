@@ -1,0 +1,46 @@
+<!-- templates/error.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #721c24;
+}
+
+pre {
+    background-color: #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>An Error Occurred</h1>
+        <p>Sorry, something went wrong. Here are the details:</p>
+        <pre>{{ error }}</pre>
+        <a href="{% url 'cpage' %}">Go back to home</a>  <!-- Link to home or another page -->
+    </div>
+</body>
+</html>

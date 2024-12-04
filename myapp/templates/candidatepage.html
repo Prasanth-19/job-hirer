@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <div class="owl-carousel header-carousel position-relative">
+        <div class="owl-carousel-item position-relative">
+            <img class="img-fluid" src="{% static 'img/carasole.jpeg' %}" alt="">
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-10 col-lg-8">
+                            <h1 class="display-3 text-white animated slideInDown mb-4">Find A Perfect Job That You Deserved</h1>
+                            <p class="fs-5 fw-medium text-white mb-4 pb-2">This is the place where a perfect job you will find</p>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#browseJobsModal" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Job</a>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#browseJobsModal" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Talent</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="owl-carousel-item position-relative">
+            <img class="img-fluid" src="{% static 'img/carasole1.jpeg' %}" alt="">
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-10 col-lg-8">
+                            <h1 class="display-3 text-white animated slideInDown mb-4">Find The Best job that will suites you</h1>
+                            <p class="fs-5 fw-medium text-white mb-4 pb-2">Make your jobs a perfect place to make a successfull way to develop.</p>
+                            <a href=""data-bs-toggle="modal" data-bs-target="#browseJobsModal" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Job</a>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#browseJobsModal"class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Talent</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Carousel End -->
+<!-- About End -->
+
+
+<!-- Jobs Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job Listing</h1>
+        <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+            <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                <li class="nav-item">
+                    <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
+                        <h6 class="mt-n1 mb-0">Featured</h6>
+                    </a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    {% for job in jobs %}
+                    <div class="job-item p-4 mb-4">
+                        
+                        <div class="row g-4">
+                            
+                            <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                <img class="flex-shrink-0 img-fluid border rounded" src="{{ MEDIA_URL }}{{ job.logo.url }}" alt="" style="width: 80px; height: 80px;">
+                                <div class="text-start ps-4">
+                                    <h5 class="mb-3">{{ job.job_name }}({{ job.company_name }})</h5>
+                                    <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ job.location }}</span>
+                                    <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ job.shifts }}</span>
+                                    <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ job.salary }}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                <div class="d-flex mb-3">
+                                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#browseJobsModal">More Info</a>
+                                </div>
+                                <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>{{ job.dead_line}}</small>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    {% endfor %}
+                    <a class="btn btn-primary py-3 px-5" href="{% url 'joblist' %}">Browse More Jobs</a>
+                </div>
+            </div>
+            
+            
+        </div>   
+    </div>
+</div>
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="row g-0 about-bg rounded overflow-hidden">
+                    <div class="col-6 text-start">
+                        <img class="img-fluid w-100" src="{% static 'img/1.jpeg' %}">
+                    </div>
+                    <div class="col-6 text-start">
+                        <img class="img-fluid" src="{% static 'img/2.jpeg' %}" style="width: 85%; margin-top: 15%;">
+                    </div>
+                    <div class="col-6 text-end">
+                        <img class="img-fluid" src="{% static 'img/3.jpeg' %}" style="width: 85%;">
+                    </div>
+                    <div class="col-6 text-end">
+                        <img class="img-fluid w-100" src="{% static 'img/4.jpeg' %}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <h1 class="mb-4">Your Gateway to Career Success</h1>
+                <p class="mb-4">Consectetur adipiscing elit. Pellentesque euismod libero in velit cursus, id elementum ipsum ornare. Fusce nec magna odio. Vestibulum auctor felis in nulla volutpat, nec vehicula sem efficitur.</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Professional growth and development</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Inclusive and supportive environment</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Access to top-tier companies and opportunities</p>
+                <a class="btn btn-primary py-3 px-5 mt-3" href="">About us </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <!-- Header End -->
+    <div class="container-xxl py-5 bg-dark page-header mb-5">
+        <div class="container my-5 pt-5 pb-4">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Job Details</h1>
+           
+        </div>
+    </div>
+    <!-- Header End -->
+
+    {% if jdetails %}
+    <!-- Job Detail Start -->
+    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row gy-5 gx-4">
+                <div class="col-lg-8">
+                    <div class="d-flex align-items-center mb-5">
+                        <img class="flex-shrink-0 img-fluid border rounded" src="{{ MEDIA_URL }}{{ jdetails.logo.url }}" alt="" style="width: 80px; height: 80px;">
+                        <div class="text-start ps-4">
+                            <h3 class="mb-3">{{ jdetails.job_name }}</h3>
+                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ jdetails.location }}</span>
+                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ jdetails.shifts }}</span>
+                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ jdetails.salary }}</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h4 class="mb-3">Job Description</h4>
+                        <p>{{ jdetails.job_description }}</p>
+                        <h4 class="mb-3">Responsibilities</h4>
+                        <p>{{ jdetails.responsibilities }}</p>
+                        <h4 class="mb-3">Qualifications</h4>
+                        <p>{{ jdetails.qualification }}</p>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                        <h4 class="mb-4">Job Summary</h4>
+                        <p><i class="fa fa-angle-right text-primary me-2"></i>Published On: {{ jdetails.created_at }}</p>
+                        <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: {{ jdetails.vacancy }} Position(s)</p>
+                        <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature: {{ jdetails.shifts }}</p>
+                        <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{ jdetails.salary }}</p>
+                        <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ jdetails.location }}</p>
+                        <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Deadline: {{ jdetails.dead_line }}</p>
+                    </div>
+                    <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
+                        <h4 class="mb-4">Company Details</h4>
+                        <p>Company Name: {{ comp.name }}</p>
+                        <p>Address: {{ comp.address }}</p>
+                        <p>Contact: {{ comp.contact }}</p>
+                    </div>
+
+                    <!-- job-detail.html -->
+                    <div class="col-12">
+                        <a href="{% url 'j_form' pk=jdetails.id %}" class="btn btn-primary w-100"> Apply Now</a>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Job Detail End -->
+    {% else %}
+    <p>No job details found.</p>
+    {% endif %}
+
+{% endblock %}
+

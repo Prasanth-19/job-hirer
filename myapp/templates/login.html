@@ -1,0 +1,36 @@
+
+
+{% extends 'registration.html' %}
+{% block content1 %}
+<h2>LOGIN </h2>
+{% endblock %}
+{% block content %}
+
+<form action="{% url 'login' %}" method="POST">
+  {% csrf_token %}
+  <div class="input-box">
+    <select class="form-select" name="role" >
+      <option value=""disabled selected required >Select Role</option>
+      <option value="Candidate" >Candidate</option>
+      <option value="Company">Company</option>
+    </select>
+  </div>
+
+  <div class="input-box">
+    <input type="email" placeholder="Enter your email" name="email" required>
+  </div>
+  <div class="input-box">
+    <input type="password" placeholder="enter password" name="password" required>
+  </div>
+  <div class="input-box" style="text-align: right; margin-top: -10px;">
+    <a href="{% url 'forgot_password' %}">Forget password</a>
+  </div>
+  <div class="input-box button">
+    <input type="submit" value="login">
+  </div>
+  <div class="text">
+    <h3>Don't have an account?</h3>
+    <center><h2><a href="{% url 'register' %}">SIGN UP</a></h2></center>
+  </div>
+</form>
+{% endblock %}

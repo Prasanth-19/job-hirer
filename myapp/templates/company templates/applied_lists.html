@@ -1,0 +1,81 @@
+{% extends 'company templates/base.html' %}
+{% block content %}
+            
+              <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Candidates Applied List</h1>
+                        
+                        <div class="card mb-4">
+                            <div class="card-body">
+                               <p>These are the candidate who were applied for the jobs.</p> 
+                                
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Candidates list
+                            </div>
+                            
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Job Title</th>
+                                            <th>Candidate Name</th>
+                                            <th>Education</th>
+                                            <th>Gender</th>
+                                            <th>Email</th>
+                                            <th>Resume</th>
+                                            <th>Cover Letter</th>
+                                            <th>Applied Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Job Title</th>
+                                            <th>Candidate Name</th>
+                                            <th>Education</th>
+                                            <th>Gender</th>
+                                            <th>Email</th>
+                                            <th>Resume</th>
+                                            <th>Cover Letter</th>
+                                            <th>Applied Date</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% if ajob %}
+                                        {% for i in ajob %}
+                                        <tr>
+                                            <td>{{ i.job.job_name }}</td>
+                                            <td>{{ i.candidate.firstname }}{{ i.candidate.lastname }}</td>
+                                            <td>{{ i.education }}</td>
+                                            <td>{{ i.gender }}</td>
+                                            <td>{{ i.email }}</td>
+                                            <td> <a href="{{ i.resume.url }}">Download</a></td>
+                                            <td>{{ i.coverletter }}</td>
+                                            <td>{{ i.submitted_at }}</td>
+                                        </tr>
+                                        {% endfor %}
+
+                                        {% else %}
+                                        <tr>
+                                            <td>None</td>
+                                            <td>None</td>
+                                            <td>None</td>
+                                            <td>None</td>
+                                            <td>None</td>
+                                            <td> None</td>
+                                            <td>None</td>
+                                            <td>None</td>
+                                        </tr>
+
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            
+{% endblock %}
